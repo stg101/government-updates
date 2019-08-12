@@ -1,13 +1,48 @@
-import requests
+import grequests
 import re
 from bs4 import BeautifulSoup
 
-page = requests.get(
-    'https://infogob.jne.gob.pe/Localidad/Peru_procesos-electorales_uHzVUEHmgS0%3dzE')
+REGIONES = [
+    "Amazonas",
+    "Ancash",
+    "Apurimac",
+    "Arequipa",
+    "Ayacucho",
+    "Cajamarca",
+    "Cusco",
+    "Huancavelica",
+    "Huanuco",
+    "Ica",
+    "Junin",
+    "La Libertad",
+    "Lambayeque",
+    "Lima",
+    "Loreto",
+    "Madre de Dios",
+    "Moquegua",
+    "Pasco",
+    "Piura",
+    "Puno",
+    "San Martin",
+    "Tacna",
+    "Tumbes",
+    "Ucayali",
+]
 
-soup = BeautifulSoup(page.text, 'html.parser')
 
-regiones = soup.find_all(id=re.compile("RPERU."))
+BASE_URL = 'https://infogob.jne.gob.pe/Localidad/Peru'
 
-for region in regiones:
-    print(region)
+
+regiones_urls = list(map(lambda region_name: BASE_URL +
+                         "/" + region_name + "_procesos-electorales", REGIONES))
+
+rs = (grequests.post(u) for u in regiones_urls)
+
+responses = grequests.map(rs)
+
+
+for response in responses:
+    region_soup = BeautifulSoup(response.text, 'html.parser')
+    autoridad = region_soup.find(
+        id="gridAutoridadesRegionales").find_all("tr")[1].find_all("td")[1].text.lower()
+    print(autoridad)

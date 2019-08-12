@@ -4,10 +4,14 @@ beautifulsoup4==4.8.0
 certifi==2019.6.16
 chardet==3.0.4
 Django==2.2.4
+gevent==1.4.0
+greenlet==0.4.15
+grequests==0.4.0
 idna==2.8
 isort==4.3.21
 lazy-object-proxy==1.4.1
 mccabe==0.6.1
+pip-autoremove==0.9.1
 pycodestyle==2.5.0
 pylint==2.3.1
 pytz==2019.2
