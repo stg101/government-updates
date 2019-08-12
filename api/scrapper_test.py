@@ -1,4 +1,5 @@
 import requests
+import re
 from bs4 import BeautifulSoup
 
 page = requests.get(
@@ -6,5 +7,7 @@ page = requests.get(
 
 soup = BeautifulSoup(page.text, 'html.parser')
 
-mapa = soup.find(id="Mapa")
-print(mapa)
+regiones = soup.find_all(id=re.compile("RPERU."))
+
+for region in regiones:
+    print(region)
