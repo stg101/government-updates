@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'locations.apps.LocationsConfig',
+    'comments',
 ]
 
 MIDDLEWARE = [
