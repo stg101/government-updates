@@ -25,11 +25,12 @@ SECRET_KEY = 'k3x=wjqr0srb5$!j8#ak#_wfks+oq**)h(u0t!&n_cdhxftn8_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', os.getenv("EXTRA_ALLOWED_HOST")]
 
 CORS_ORIGIN_WHITELIST = (
     "localhost:3000",
-    '127.0.0.1:3000'
+    '127.0.0.1:3000',
+    os.getenv("EXTRA_ALLOWED_HOST")+":"+os.getenv("EXTRA_ALLOWED_PORT")
 )
 
 # Application definition
@@ -84,8 +85,12 @@ WSGI_APPLICATION = 'api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv("DATABASE_NAME"),
+        'USER': os.getenv("DATABASE_USERNAME"),
+        'PASSWORD': os.getenv("DATABASE_PASSWORD"),
+        'HOST': os.getenv("DATABASE_HOST"),
+        'PORT': os.getenv("DATABASE_PORT"),
     }
 }
 

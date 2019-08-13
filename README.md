@@ -11,7 +11,8 @@
 
 1. `cd` into `api`: `cd api`.
 2. Install dependencies: `pip install -r requirements.txt`.
-3. Start api server: `python manage.py runserver`.
+3. Create .env file and fill it usign .env_example as guidance.
+4. Start api server: `python manage.py runserver`.
 
 ### Client - React , Redux
 
