@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { requestLocations, requestComments } from "./actions";
+import { requestLocations, requestComments , createComment} from "./actions";
 
 export function useRequestLocations() {
   const dispatch = useDispatch();
@@ -11,6 +11,14 @@ export function useRequestComments() {
   const dispatch = useDispatch();
   return React.useCallback(
     authority => dispatch(requestComments(authority)),
+    [dispatch]
+  );
+}
+
+export function useCreateComment() {
+  const dispatch = useDispatch();
+  return React.useCallback(
+    comment => dispatch(createComment(comment)),
     [dispatch]
   );
 }

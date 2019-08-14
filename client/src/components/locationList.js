@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/core";
 import { Card } from "../components/ui";
 
-function LocationList({ onLocationClick, locations }) {
+function LocationList({ onLocationClick, locations, selectedAuthority }) {
   return (
     <div css={{ padding: "2rem" }}>
       <h2>Regiones</h2>
@@ -16,8 +16,12 @@ function LocationList({ onLocationClick, locations }) {
               justifyContent: "space-around",
               padding: "1rem 2rem",
               height: "40px",
+              backgroundColor:
+                selectedAuthority == location.authority
+                  ? "rgb(176, 220, 252)"
+                  : "inherit",
               "&:hover": {
-                backgroundColor: "rgb(242,242,242)",
+                backgroundColor: "rgb(209, 234, 252)",
                 cursor: "pointer"
               }
             }}

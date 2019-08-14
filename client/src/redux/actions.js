@@ -19,4 +19,17 @@ function requestComments(authority) {
   };
 }
 
-export { requestLocations, requestComments };
+function createComment(comment) {
+  return async dispatch => {
+    let response = await fetch(URL_COMMENTS, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(comment)
+    });
+    if (response.ok) dispatch(requestComments(comment.authority));
+  };
+}
+
+export { requestLocations, requestComments, createComment };

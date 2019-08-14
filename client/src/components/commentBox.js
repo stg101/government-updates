@@ -1,8 +1,37 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
+import { useState, useEffect } from "react";
 import { Card, Button, CircleButton } from "../components/ui";
+import { useCreateComment } from "../redux/actionHooks";
 
-function CommentBox({ isCommentBoxOpen, onCloseCommentBoxClick, onCommentBoxClick }) {
+function CommentBox({
+  selectedAuthority,
+  isCommentBoxOpen,
+  setIsCommentBoxOpen
+}) {
+  const createComment = useCreateComment();
+  const [comment, setComment] = useState("");
+
+  function onCloseCommentBoxClick() {
+    setIsCommentBoxOpen(false);
+  }
+
+  function onCommentBoxClick() {
+    setIsCommentBoxOpen(true);
+  }
+
+  function onComment() {
+    if (comment !== "") {
+      createComment({ authority: selectedAuthority, content: comment });
+      setIsCommentBoxOpen(false);
+    }
+  }
+
+  function onCommentChange(event) {
+    const value = event.target.value;
+    setComment(value);
+  }
+
   return (
     <Card
       styles={{
@@ -28,7 +57,23 @@ function CommentBox({ isCommentBoxOpen, onCloseCommentBoxClick, onCommentBoxClic
             }}
           >
             <CircleButton onClick={onCloseCommentBoxClick}>⨯</CircleButton>
-            <Button>comentar</Button>
+            <Button
+              onClick={onComment}
+              styles={
+                comment === ""
+                  ? {
+                      backgroundColor: "rgb(115, 186, 221)",
+
+                      "&:hover": {
+                        backgroundColor: "rgb(115, 186, 221)",
+                        color: "white"
+                      }
+                    }
+                  : {}
+              }
+            >
+              comentar
+            </Button>
           </div>
           <textarea
             css={{
@@ -39,6 +84,8 @@ function CommentBox({ isCommentBoxOpen, onCloseCommentBoxClick, onCommentBoxClic
               height: "150px",
               width: "100%"
             }}
+            autoFocus
+            onChange={onCommentChange}
           />
         </div>
       ) : (
@@ -48,9 +95,10 @@ function CommentBox({ isCommentBoxOpen, onCloseCommentBoxClick, onCommentBoxClic
             color: "rgb(109,126,140)",
             borderRadius: ".4em",
             boxSizing: "border-box",
-            padding: "0.5rem",
+            padding: "1rem",
             cursor: "text",
-            width: "100%"
+            width: "100%",
+            fontWeight: "bold"
           }}
           onClick={onCommentBoxClick}
         >
