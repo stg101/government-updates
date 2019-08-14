@@ -6,20 +6,46 @@ function Button({ styles, ...props }) {
     <button
       {...props}
       css={{
-        backgroundColor: "black",
-        border: "1px solid black",
+        backgroundColor: "rgb(5,155,229)",
+        border: "none",
+        height: "2rem",
+        width: "auto",
         borderRadius: ".25rem",
         color: "white",
         cursor: "pointer",
         fontSize: ".8rem",
-        padding: ".75rem 0",
+        padding: "0 .75rem",
         transition: "all 200ms ease",
         textAlign: "center",
-        textTransform: "uppercase",
-        width: "100%",
+        fontWeight: "bold",
+
         "&:hover": {
-          backgroundColor: "white",
-          color: "black"
+          backgroundColor: "rgb(0,135,209)",
+          color: "white"
+        },
+        ...styles
+      }}
+    />
+  );
+}
+
+function CircleButton({ styles, ...props }) {
+  return (
+    <div
+      {...props}
+      css={{
+        height: "40px",
+        width: "40px",
+        borderRadius: "50%",
+        textAlign: "center",
+        verticalAlign: "middle",
+        lineHeight: "40px",
+        fontWeight: "9px",
+        fontSize: "22px",
+        color: "rgb(5,155,229)",
+        "&:hover": {
+          backgroundColor: "rgb(176, 220, 252)",
+          cursor: "pointer"
         },
         ...styles
       }}
@@ -188,4 +214,4 @@ function Select({ styles = {}, children, ...props }) {
   );
 }
 
-export { Button, Card, Input, Modal, Select };
+export { Button, Card, Input, Modal, Select, CircleButton };

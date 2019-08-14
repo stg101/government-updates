@@ -11,9 +11,9 @@ ReactDOM.render(
       styles={{
         body: {
           fontFamily: "'Roboto', 'sans-serif'",
-          padding: "40px",
+          padding: "0px",
           margin: 0,
-          backgroundColor: "rgb(250,250,250)",
+          backgroundColor: "rgb(240,240,240)",
           fontSize: "small"
         },
         a: { textDecoration: "inherit", color: "inherit" },
