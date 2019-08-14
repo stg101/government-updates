@@ -7,4 +7,10 @@ function useLocations() {
   }, shallowEqual);
 }
 
-export { useLocations };
+function useComments() {
+  return useSelector(state => {
+    return state.comments;
+  }, shallowEqual);
+}
+
+export { useLocations, useComments };

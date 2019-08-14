@@ -33,7 +33,7 @@ function Card({ styles, ...props }) {
       {...props}
       css={{
         background: "white",
-        borderRadius: ".5em",
+        borderRadius: ".2em",
         boxShadow: "0px 2px 5px 0px rgba(0, 0, 0, .12)",
         boxSizing: "border-box",
         padding: "2rem",
