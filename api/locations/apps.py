@@ -1,9 +1,9 @@
 from bs4 import BeautifulSoup
-import csv
-import re
 from django.apps import AppConfig
+import csv
 import asyncio
 import requests
+from datetime import datetime
 
 
 regions = {
@@ -68,14 +68,22 @@ class LocationsConfig(AppConfig):
     name = 'locations'
 
     def ready(self):
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(async_requests())
+        from .models import Location
+        now = datetime.now()
+        should_update = False
+        minutes_ago = 0
+        if Location.objects.first() is None:
+            should_update = True
+        else:
+            last_location_update = Location.objects.first().created_on.replace(tzinfo=None)
+            minutes_ago = (now - last_location_update).total_seconds() / 60.0
 
-        with open('scrapped_data.csv', mode='w') as csv_file:
-            fieldnames = ['name', 'id', 'authority']
-            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+        if should_update or minutes_ago > 3:
+            loop = asyncio.get_event_loop()
+            loop.run_until_complete(async_requests())
 
-            writer.writeheader()
+            Location.objects.all().delete()
 
             for region in regions.values():
-                writer.writerow(region)
+                Location.objects.create(
+                    authority=region["authority"], name=region["name"], scope="Re")

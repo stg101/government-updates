@@ -46,8 +46,10 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
 
-    'locations.apps.LocationsConfig',
+    # 'locations',
     'comments',
+    'locations.apps.LocationsConfig',
+
 ]
 
 MIDDLEWARE = [
