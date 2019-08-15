@@ -32,8 +32,7 @@ function App() {
       <div
         css={{
           display: "grid",
-          gridTemplateColumns: "30vw 1fr",
-          gridGap: "50px"
+          gridTemplateColumns: "30vw 1fr"
         }}
       >
         <LocationList
