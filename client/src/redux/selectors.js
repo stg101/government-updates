@@ -12,4 +12,10 @@ function useComments() {
   }, shallowEqual);
 }
 
-export { useLocations, useComments };
+function useVotes() {
+  return useSelector(state => {
+    return state.votes;
+  }, shallowEqual);
+}
+
+export { useLocations, useComments, useVotes };

@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card, Button, CircleButton } from "../components/ui";
 import { useCreateComment } from "../redux/actionHooks";
 

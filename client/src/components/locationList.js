@@ -17,7 +17,7 @@ function LocationList({ onLocationClick, locations, selectedAuthority }) {
               padding: "1rem 2rem",
               height: "40px",
               backgroundColor:
-                selectedAuthority == location.authority
+                selectedAuthority === location.authority
                   ? "rgb(176, 220, 252)"
                   : "inherit",
               "&:hover": {

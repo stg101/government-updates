@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useRequestLocations, useRequestComments } from "./redux/actionHooks";
 import { useLocations, useComments } from "./redux/selectors";
 import CommentBox from "./components/commentBox";

@@ -32,4 +32,20 @@ function createComment(comment) {
   };
 }
 
-export { requestLocations, requestComments, createComment };
+function makeVote(voteData, authority) {
+  return async dispatch => {
+    let response = await fetch(`${URL_COMMENTS}${voteData.pk}/vote/`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(voteData)
+    });
+    if (response.ok) {
+      dispatch(requestComments(authority));
+      dispatch({ type: "VOTE_COMMENT", payload: voteData });
+    }
+  };
+}
+
+export { requestLocations, requestComments, createComment, makeVote };

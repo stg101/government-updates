@@ -77,10 +77,12 @@ def comments_vote(request, pk):
 
     if request_body['vote'] == "like":
         data["likes"] += change
+        if request_body['swap'] == "true":
+            data["dislikes"] -= change
     elif request_body['vote'] == "dislike":
         data["dislikes"] += change
-
-    print(data)
+        if request_body['swap'] == "true":
+            data["likes"] -= change
 
     serializer = CommentSerializer(comment, data=data)
     if serializer.is_valid():
