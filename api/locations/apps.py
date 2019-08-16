@@ -10,7 +10,7 @@ BASE_URL = 'https://infogob.jne.gob.pe/Localidad'
 SCOPES_ARR = ["Co", "Re", "Pr", "Di"]
 SCRAPPER_CONTEXT_ARR = ["gridAutoridadesRegionales",
                         "gridAutoridadesProvinciales", "gridAutoridadesDistritales"]
-MAX_ITER = 2
+MAX_ITER = 3
 
 
 async def async_requests(base_url, location, step, model, parent):
