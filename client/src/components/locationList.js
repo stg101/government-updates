@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Card } from "../components/ui";
+import { capitalize } from "../helpers";
 
 function LocationList({ onLocationClick, locations, selectedAuthority }) {
   function alphabeticalCompare(a, b) {
@@ -29,7 +30,7 @@ function LocationList({ onLocationClick, locations, selectedAuthority }) {
                 padding: "1rem 2rem",
                 height: "40px",
                 backgroundColor:
-                  selectedAuthority === location.authority
+                  selectedAuthority === capitalize(location.authority)
                     ? "rgb(176, 220, 252)"
                     : "inherit",
                 "&:hover": {
@@ -37,10 +38,10 @@ function LocationList({ onLocationClick, locations, selectedAuthority }) {
                   cursor: "pointer"
                 }
               }}
-              onClick={() => onLocationClick(location.authority)}
+              onClick={() => onLocationClick(capitalize(location.authority))}
             >
-              <h3 css={{ margin: "0px" }}>{location.name}</h3>
-              <div>{location.authority}</div>
+              <h3 css={{ margin: "0px" }}>{capitalize(location.name)}</h3>
+              <div>{capitalize(location.authority)}</div>
             </div>
           ))}
       </Card>
