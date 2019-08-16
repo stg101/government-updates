@@ -76,7 +76,7 @@ function Input({ styles, ...props }) {
       {...props}
       css={{
         background: "none",
-        border: "1px solid #eaeaea",
+        border: "1px solid gray",
         borderRadius: ".25rem",
         boxSizing: "border-box",
         display: "block",
@@ -85,7 +85,7 @@ function Input({ styles, ...props }) {
         width: "100%",
         "&:focus": {
           outline: "none",
-          borderColor: "#444444"
+          borderColor: "rgb(5,155,229)"
         },
         ...styles
       }}
