@@ -3,8 +3,26 @@ import { combineReducers } from "redux";
 const initialState = {
   locations: {},
   comments: {},
-  votes: {}
+  votes: {},
+  parentLocation: {
+    authority: "martin vizcarra cornejo",
+    scope: "Co",
+    name: "peru"
+  }
 };
+
+function parentLocationReducer(
+  state = initialState.parentLocation,
+  action = {}
+) {
+  switch (action.type) {
+    case "CHANGE_PARENT_LOCATION": {
+      return action.payload;
+    }
+    default:
+      return state;
+  }
+}
 
 function locationsReducer(state = initialState.locations, action = {}) {
   switch (action.type) {
@@ -48,7 +66,8 @@ function votesReducer(state = initialState.votes, action = {}) {
 const reducer = combineReducers({
   locations: locationsReducer,
   comments: commentsReducer,
-  votes: votesReducer
+  votes: votesReducer,
+  parentLocation: parentLocationReducer
 });
 
 export default reducer;

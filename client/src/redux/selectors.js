@@ -1,5 +1,11 @@
 import { useSelector, shallowEqual } from "react-redux";
 
+function useParentLocation() {
+  return useSelector(state => {
+    return state.parentLocation;
+  }, shallowEqual);
+}
+
 function useLocations() {
   return useSelector(state => {
     return state.locations;
@@ -18,4 +24,4 @@ function useVotes() {
   }, shallowEqual);
 }
 
-export { useLocations, useComments, useVotes };
+export { useLocations, useComments, useVotes ,useParentLocation};

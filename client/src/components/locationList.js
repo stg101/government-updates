@@ -1,9 +1,13 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Card } from "../components/ui";
-import { capitalize } from "../helpers";
+import { useParentLocation } from "../redux/selectors";
+import LocationItem from "./locationItem";
+import { getLocationType, getLocationSublabel } from "../helpers";
 
 function LocationList({ onLocationClick, locations, selectedAuthority }) {
+  const parentLocation = useParentLocation();
+
   function alphabeticalCompare(a, b) {
     if (a.name < b.name) {
       return -1;
@@ -16,33 +20,27 @@ function LocationList({ onLocationClick, locations, selectedAuthority }) {
 
   return (
     <div css={{ padding: "2rem" }}>
-      <h2>Regiones</h2>
+      <h2 css={{ marginBottom: "20px" }}>
+        {getLocationType[parentLocation.scope]}
+      </h2>
+      <LocationItem
+        location={parentLocation}
+        onLocationClick={onLocationClick}
+        selectedAuthority={selectedAuthority}
+      />
+      <h2 css={{ margin: "20px 0px" }}>
+        {getLocationSublabel[parentLocation.scope]}
+      </h2>
       <Card styles={{ padding: "0px", margin: "30px 0px" }}>
         {Object.values(locations)
           .sort(alphabeticalCompare)
           .map(location => (
-            <div
+            <LocationItem
               key={JSON.stringify(location)}
-              css={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-around",
-                padding: "1rem 2rem",
-                height: "40px",
-                backgroundColor:
-                  selectedAuthority === capitalize(location.authority)
-                    ? "rgb(176, 220, 252)"
-                    : "inherit",
-                "&:hover": {
-                  backgroundColor: "rgb(209, 234, 252)",
-                  cursor: "pointer"
-                }
-              }}
-              onClick={() => onLocationClick(capitalize(location.authority))}
-            >
-              <h3 css={{ margin: "0px" }}>{capitalize(location.name)}</h3>
-              <div>{capitalize(location.authority)}</div>
-            </div>
+              location={location}
+              onLocationClick={onLocationClick}
+              selectedAuthority={selectedAuthority}
+            />
           ))}
       </Card>
     </div>

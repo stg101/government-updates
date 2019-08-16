@@ -12,11 +12,14 @@ import json
 def locations_list(request):
     if request.method == 'GET':
 
-        authority_name = request.GET.get('name', '')
+        scope = request.GET.get('scope', '')
+        parent = request.GET.get('parent', '')
         locations = Location.objects.all()
 
-        if authority_name != '':
-            locations = locations.filter(authority=authority_name)
+        if scope != '':
+            locations = locations.filter(scope=scope)
+        if parent != '':
+            locations = locations.filter(parent=parent)
 
         serializer = LocationSerializer(locations, many=True)
 
@@ -28,4 +31,3 @@ def locations_list(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-

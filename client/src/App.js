@@ -1,28 +1,46 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { useState, useEffect } from "react";
-import { useRequestLocations, useRequestComments } from "./redux/actionHooks";
-import { useLocations, useComments } from "./redux/selectors";
+import {
+  useRequestLocations,
+  useRequestComments,
+  useChangeParentLocation,
+  useRequestParentLocation
+} from "./redux/actionHooks";
+import {
+  useLocations,
+  useComments,
+  useParentLocation
+} from "./redux/selectors";
 import CommentBox from "./components/commentBox";
 import Comment from "./components/comment";
 import LocationList from "./components/locationList";
+import { capitalize, getChildScope } from "./helpers";
 
 function App() {
   const requestLocations = useRequestLocations();
   const requestComments = useRequestComments();
+  const changeParentLocation = useChangeParentLocation();
+  const requestParentLocation = useRequestParentLocation();
   const locations = useLocations();
   const comments = useComments();
+  const parentLocation = useParentLocation();
   const [selectedAuthority, setSelectedAuthority] = useState("Comments");
   const [isCommentBoxOpen, setIsCommentBoxOpen] = useState(false);
 
   useEffect(() => {
-    requestLocations();
-    requestComments();
-  }, [requestLocations, requestComments]);
+    requestParentLocation();
+  }, [requestParentLocation]);
 
-  function onLocationClick(authority) {
+  useEffect(() => {
+    let authority = capitalize(parentLocation.authority);
+    requestLocations(getChildScope(parentLocation.scope), parentLocation.pk);
     requestComments(authority);
     setSelectedAuthority(authority);
+  }, [requestLocations, requestComments, JSON.stringify(parentLocation)]);
+
+  function onLocationClick(location) {
+    changeParentLocation(location);
     setIsCommentBoxOpen(false);
   }
 

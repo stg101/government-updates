@@ -1,10 +1,33 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { requestLocations, requestComments, createComment, makeVote } from "./actions";
+import {
+  requestParentLocation,
+  changeParentLocation,
+  requestLocations,
+  requestComments,
+  createComment,
+  makeVote
+} from "./actions";
+
+export function useChangeParentLocation() {
+  const dispatch = useDispatch();
+  return React.useCallback((location) => dispatch(changeParentLocation(location)), [
+    dispatch
+  ]);
+}
 
 export function useRequestLocations() {
   const dispatch = useDispatch();
-  return React.useCallback(() => dispatch(requestLocations()), [dispatch]);
+  return React.useCallback((scope,parent) => dispatch(requestLocations(scope,parent)), [
+    dispatch
+  ]);
+}
+
+export function useRequestParentLocation() {
+  const dispatch = useDispatch();
+  return React.useCallback(() => dispatch(requestParentLocation()), [
+    dispatch
+  ]);
 }
 
 export function useRequestComments() {
@@ -23,7 +46,8 @@ export function useCreateComment() {
 
 export function useMakeVote() {
   const dispatch = useDispatch();
-  return React.useCallback((voteData,authority) => dispatch(makeVote(voteData,authority)), [
-    dispatch
-  ]);
+  return React.useCallback(
+    (voteData, authority) => dispatch(makeVote(voteData, authority)),
+    [dispatch]
+  );
 }

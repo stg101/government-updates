@@ -6,5 +6,5 @@ class LocationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Location
-        fields = ('name', 'authority', 'scope',
+        fields = ('pk', 'name', 'authority', 'scope',
                   'parent', 'created_on', "url_base")
