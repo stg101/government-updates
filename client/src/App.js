@@ -26,6 +26,7 @@ function App() {
   const comments = useComments();
   const parentLocation = useParentLocation();
   const [selectedAuthority, setSelectedAuthority] = useState("Comments");
+  const [lastLocation, setLastLocation] = useState([parentLocation]);
   const [isCommentBoxOpen, setIsCommentBoxOpen] = useState(false);
 
   useEffect(() => {
@@ -40,6 +41,7 @@ function App() {
   }, [requestLocations, requestComments, JSON.stringify(parentLocation)]);
 
   function onLocationClick(location) {
+    setLastLocation(lastLocation.concat([parentLocation]));
     changeParentLocation(location);
     setIsCommentBoxOpen(false);
   }
@@ -57,6 +59,8 @@ function App() {
           onLocationClick={onLocationClick}
           locations={locations}
           selectedAuthority={selectedAuthority}
+          lastLocation={lastLocation}
+          setLastLocation={setLastLocation}
         />
 
         <div css={{ padding: "2rem" }}>

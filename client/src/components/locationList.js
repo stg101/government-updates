@@ -1,31 +1,62 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Card } from "../components/ui";
+import { Card, CircleButton } from "../components/ui";
 import { useParentLocation } from "../redux/selectors";
+import { useChangeParentLocation } from "../redux/actionHooks";
+import { IoIosArrowBack } from "react-icons/io";
 import LocationItem from "./locationItem";
-import { getLocationType, getLocationSublabel } from "../helpers";
+import {
+  getLocationType,
+  getLocationSublabel,
+  alphabeticalCompare
+} from "../helpers";
 
-function LocationList({ onLocationClick, locations, selectedAuthority }) {
+function LocationList({
+  onLocationClick,
+  locations,
+  selectedAuthority,
+  lastLocation,
+  setLastLocation
+}) {
   const parentLocation = useParentLocation();
+  const changeParentLocation = useChangeParentLocation();
 
-  function alphabeticalCompare(a, b) {
-    if (a.name < b.name) {
-      return -1;
+  function handleBackClick() {
+    if (lastLocation.length > 1) {
+      changeParentLocation(lastLocation.pop());
+      setLastLocation(lastLocation);
     }
-    if (a.name > b.name) {
-      return 1;
-    }
-    return 0;
   }
 
   return (
     <div css={{ padding: "2rem" }}>
-      <h2 css={{ marginBottom: "20px" }}>
-        {getLocationType[parentLocation.scope]}
-      </h2>
+      <div
+        css={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          marginBottom: "15px"
+        }}
+      >
+        <CircleButton>
+          <IoIosArrowBack
+            css={{
+              textAlign: "center",
+              verticalAlign: "middle",
+              lineHeight: "40px"
+            }}
+            onClick={handleBackClick}
+          />
+        </CircleButton>
+
+        <h2 css={{ marginLeft: "15px" }}>
+          {getLocationType[parentLocation.scope]}
+        </h2>
+      </div>
+
       <LocationItem
         location={parentLocation}
-        onLocationClick={onLocationClick}
+        onLocationClick={() => {}}
         selectedAuthority={selectedAuthority}
       />
       <h2 css={{ margin: "20px 0px" }}>

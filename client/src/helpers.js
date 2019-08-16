@@ -11,6 +11,16 @@ let getLocationSublabel = {
   Pr: "Distritos"
 };
 
+function alphabeticalCompare(a, b) {
+  if (a.name < b.name) {
+    return -1;
+  }
+  if (a.name > b.name) {
+    return 1;
+  }
+  return 0;
+}
+
 function arrayToObject(array) {
   return array.reduce((obj, item) => {
     obj[item.pk] = item;
@@ -36,5 +46,6 @@ export {
   capitalize,
   getChildScope,
   getLocationType,
-  getLocationSublabel
+  getLocationSublabel,
+  alphabeticalCompare
 };
