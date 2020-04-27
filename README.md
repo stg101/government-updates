@@ -19,4 +19,4 @@ make restart-db
 make up
 ```
 
-The scrapper will begin working on the first server run, so it can take some time, while all the data loaded.
+The scrapper will begin working on the first server run, so it can take some time while the data is loading.
