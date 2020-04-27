@@ -7,6 +7,7 @@ This is a React + Django application where we use the data from [Infogob](https:
 ## Dependencies
 
 - make
+- docker-compose
 
 ## Setup
 
