@@ -1,0 +1,26 @@
+version: '3'
+services:
+  api:
+    build: ./api
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+        - ./api:/home/app/api
+    ports:
+        - "8000:8000"
+    depends_on:
+        - db
+  db:
+    image: postgres
+    environment:
+        - POSTGRES_DB=postgres_db
+        - POSTGRES_USER=user
+        - POSTGRES_PASSWORD=123456
+    ports:
+        - "5432:5432"
+  client:
+    build: ./client
+    volumes:
+      - ./client/src:/home/app/client/src
+      - ./client/public:/home/app/client/public
+    ports:
+    - 3000:3000

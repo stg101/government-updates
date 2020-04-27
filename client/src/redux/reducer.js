@@ -7,8 +7,8 @@ const initialState = {
   parentLocation: {
     authority: "martin vizcarra cornejo",
     scope: "Co",
-    name: "peru"
-  }
+    name: "peru",
+  },
 };
 
 function parentLocationReducer(
@@ -17,6 +17,7 @@ function parentLocationReducer(
 ) {
   switch (action.type) {
     case "CHANGE_PARENT_LOCATION": {
+      if (!action.payload) return state;
       return action.payload;
     }
     default:
@@ -67,7 +68,7 @@ const reducer = combineReducers({
   locations: locationsReducer,
   comments: commentsReducer,
   votes: votesReducer,
-  parentLocation: parentLocationReducer
+  parentLocation: parentLocationReducer,
 });
 
 export default reducer;
