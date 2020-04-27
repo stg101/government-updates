@@ -9,6 +9,9 @@ This is a React + Django application where we use the data from [Infogob](https:
 
 ## Setup
 
+Create a .env file copying the content of .env_example
+The MAX_ITER variable defines the maximum children of a locality that can be scrapped.
+
 ```bash
 make restart-db
 ```
