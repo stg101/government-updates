@@ -1,6 +1,6 @@
 # Peruvian Authorities Book
 
-This is a React + Django application where we use the data from [Infogob](https://infogob.jne.gob.pe/) to be able to find, make comments and vote, on major authorities of Peruvian regions.
+This one of my first projects after finishing the bootcamp, a React + Django application where we use the data from [Infogob](https://infogob.jne.gob.pe/) to be able to find, make comments and vote, on major authorities of Peruvian regions.
 
 ![frames](images/gover.png)
 
